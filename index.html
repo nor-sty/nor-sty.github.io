@@ -3,55 +3,87 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>NOR STY | Alternative Clothing & Accessories</title>
+    <title>NOR STY | Alternative Clothing, Accessories & Makeup</title>
     <style>
         :root {
             --bg-color: #121212;
             --card-bg: #1e1e1e;
-            --accent-color: #8a0303; /* Rojo oscuro vibrante */
+            --accent-color: #8a0303;
+            --accent-hover: #b30000;
             --text-color: #f0f0f0;
+            --muted-text: #888888;
         }
 
         * { margin: 0; padding: 0; box-sizing: border-box; }
-        
+
         body {
-            font-family: 'Courier New', Courier, monospace; /* Toque alternativo/Y2K */
+            font-family: 'Courier New', Courier, monospace;
             background-color: var(--bg-color);
             color: var(--text-color);
             line-height: 1.6;
+            padding-bottom: 80px;
         }
 
         header {
             background-color: #000;
-            padding: 3rem 1rem;
+            padding: 2.5rem 1rem;
             text-align: center;
             border-bottom: 2px solid var(--accent-color);
             box-shadow: 0 4px 15px rgba(138, 3, 3, 0.3);
         }
 
-        header h1 { 
-            font-size: 3.5rem; 
-            margin: 0;
-            letter-spacing: 5px;
+        header h1 {
+            font-size: 3rem;
+            letter-spacing: 6px;
             text-transform: uppercase;
+        }
+
+        header p {
+            font-size: 1rem;
+            color: var(--muted-text);
+            margin-top: 8px;
+        }
+
+        .container {
+            max-width: 1050px;
+            margin: 0 auto;
+            padding: 2rem 1rem;
+        }
+
+        /* Filtros de Categoría */
+        .filters {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin-bottom: 2rem;
+        }
+
+        .filter-btn {
+            background-color: var(--card-bg);
             color: var(--text-color);
-        }
-        
-        header p { font-size: 1.1rem; color: #888; margin-top: 10px; }
-
-        .container { max-width: 1000px; margin: 0 auto; padding: 2rem 1rem; }
-
-        .section-title { 
-            font-size: 2rem; 
-            margin: 3rem 0 1.5rem; 
-            border-bottom: 1px solid #333; 
-            padding-bottom: 0.5rem; 
-            color: var(--accent-color); 
+            border: 1px solid #333;
+            padding: 8px 18px;
+            cursor: pointer;
+            font-family: inherit;
+            font-size: 0.9rem;
             text-transform: uppercase;
-            letter-spacing: 2px;
+            border-radius: 3px;
+            transition: all 0.2s;
         }
 
-        .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 20px; }
+        .filter-btn.active, .filter-btn:hover {
+            background-color: var(--accent-color);
+            border-color: var(--accent-color);
+            font-weight: bold;
+        }
+
+        /* Grilla de Productos */
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+            gap: 20px;
+        }
 
         .card {
             background-color: var(--card-bg);
@@ -59,137 +91,494 @@
             border-radius: 5px;
             overflow: hidden;
             transition: transform 0.3s, border-color 0.3s;
-            text-align: center;
-            padding-bottom: 1.5rem;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
         }
 
-        .card:hover { 
-            transform: translateY(-5px); 
-            border-color: var(--accent-color); 
+        .card:hover {
+            transform: translateY(-5px);
+            border-color: var(--accent-color);
         }
 
-        .card img { 
-            width: 100%; 
-            height: 280px; 
-            object-fit: cover; 
+        .card img {
+            width: 100%;
+            height: 260px;
+            object-fit: cover;
             border-bottom: 1px solid #333;
-            margin-bottom: 15px;
-            border-radius: 3px 3px 0 0;
+            cursor: pointer;
         }
-        
-        .card-content { padding: 0 1.5rem; }
-        .card-content h3 { font-size: 1.2rem; margin-bottom: 0.5rem; text-transform: uppercase; }
-        .card-content .price { font-weight: bold; color: var(--accent-color); font-size: 1.3rem; margin-bottom: 0.5rem; }
-        .card-content p { font-size: 0.9rem; color: #888; }
 
-        .payment-section {
+        .card-body {
+            padding: 15px;
             text-align: center;
-            margin-top: 4rem;
-            padding: 3rem 1rem;
-            background-color: var(--card-bg);
-            border: 1px solid #333;
-            border-radius: 5px;
-            box-shadow: inset 0 0 10px rgba(0,0,0,0.5);
         }
 
-        .payment-section h2 { margin-bottom: 1rem; text-transform: uppercase; color: var(--text-color); }
+        .category-tag {
+            font-size: 0.75rem;
+            color: var(--muted-text);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
 
-        .qr-container { 
-            width: 250px; 
-            height: 250px; 
-            margin: 2rem auto; 
-            border: 2px solid var(--accent-color); 
-            padding: 10px; 
-            background-color: #fff; 
+        .card-body h3 {
+            font-size: 1.15rem;
+            margin: 5px 0;
+            text-transform: uppercase;
+        }
+
+        .card-body .desc {
+            font-size: 0.85rem;
+            color: #aaa;
+            margin-bottom: 10px;
+        }
+
+        .price {
+            font-size: 1.3rem;
+            font-weight: bold;
+            color: var(--accent-color);
+            margin-bottom: 10px;
+        }
+
+        .variant-select {
+            width: 100%;
+            padding: 8px;
+            margin-bottom: 10px;
+            background-color: #121212;
+            color: var(--text-color);
+            border: 1px solid #444;
+            font-family: inherit;
+            border-radius: 3px;
+        }
+
+        .btn-add {
+            background-color: var(--accent-color);
+            color: white;
+            border: none;
+            padding: 10px 15px;
+            cursor: pointer;
+            font-family: inherit;
+            font-weight: bold;
+            text-transform: uppercase;
+            border-radius: 3px;
+            width: 100%;
+            transition: background 0.2s;
+        }
+
+        .btn-add:hover {
+            background-color: var(--accent-hover);
+        }
+
+        /* Botón Flotante del Carrito */
+        .carrito-btn {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            background-color: var(--text-color);
+            color: var(--bg-color);
+            border: 2px solid var(--accent-color);
+            padding: 14px 22px;
+            border-radius: 50px;
+            font-family: inherit;
+            font-size: 1rem;
+            font-weight: bold;
+            cursor: pointer;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.8);
+            z-index: 100;
+            transition: transform 0.2s;
+        }
+
+        .carrito-btn:hover {
+            transform: scale(1.05);
+        }
+
+        /* Fondo Oscuro y Modal del Carrito */
+        .modal-overlay {
+            display: none;
+            position: fixed;
+            top: 0; left: 0;
+            width: 100%; height: 100%;
+            background: rgba(0, 0, 0, 0.85);
+            z-index: 200;
+            justify-content: center;
+            align-items: center;
+            padding: 15px;
+        }
+
+        #modalCarrito {
+            background-color: var(--card-bg);
+            border: 2px solid var(--accent-color);
+            padding: 20px;
+            width: 100%;
+            max-width: 460px;
+            max-height: 90vh;
+            overflow-y: auto;
             border-radius: 5px;
+            box-shadow: 0 0 25px rgba(138, 3, 3, 0.4);
+        }
+
+        .modal-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 1px solid #333;
+            padding-bottom: 10px;
+            margin-bottom: 15px;
+        }
+
+        .cerrar {
+            cursor: pointer;
+            font-weight: bold;
+            font-size: 1.4rem;
+            color: var(--accent-color);
+        }
+
+        .carrito-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 1px solid #2a2a2a;
+            padding: 8px 0;
+            font-size: 0.9rem;
+        }
+
+        .qty-controls button {
+            background: #333;
+            color: #fff;
+            border: none;
+            padding: 2px 8px;
+            cursor: pointer;
+            font-family: inherit;
+            border-radius: 2px;
+        }
+
+        .total-box {
+            text-align: right;
+            font-size: 1.3rem;
+            font-weight: bold;
+            margin: 15px 0;
+            color: #fff;
+        }
+
+        /* Sección Yape dentro del Modal */
+        .yape-box {
+            background-color: #121212;
+            border: 1px dashed var(--accent-color);
+            padding: 15px;
+            text-align: center;
+            border-radius: 5px;
+            margin-bottom: 15px;
+        }
+
+        .qr-img {
+            width: 180px;
+            height: 180px;
+            object-fit: contain;
+            background: #fff;
+            padding: 8px;
+            border-radius: 5px;
+            margin: 10px auto;
+            display: block;
+        }
+
+        .btn-copy {
+            background-color: #333;
+            color: #fff;
+            border: 1px solid #555;
+            padding: 6px 12px;
+            font-family: inherit;
+            font-size: 0.8rem;
+            cursor: pointer;
+            border-radius: 3px;
+            margin-top: 5px;
+        }
+
+        .form-input {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 10px;
+            background: #121212;
+            color: white;
+            border: 1px solid #444;
+            font-family: inherit;
+            border-radius: 3px;
         }
 
         .btn-whatsapp {
-            display: inline-block;
-            background-color: var(--accent-color); 
+            background-color: #128C7E;
             color: white;
-            font-family: inherit;
-            font-weight: bold;
-            text-decoration: none;
-            padding: 15px 30px;
-            font-size: 1.1rem;
-            border-radius: 3px;
-            margin-top: 1rem;
-            transition: background 0.3s, transform 0.2s;
-            text-transform: uppercase;
-            letter-spacing: 1px;
             border: none;
+            padding: 12px;
+            width: 100%;
+            font-family: inherit;
+            font-size: 1rem;
+            font-weight: bold;
+            text-transform: uppercase;
+            cursor: pointer;
+            border-radius: 3px;
+            margin-top: 5px;
         }
-        
-        .btn-whatsapp:hover { background-color: #b30000; transform: scale(1.02); }
 
-        footer { text-align: center; padding: 2rem; font-size: 0.9rem; color: #555; border-top: 1px solid #333; margin-top: 4rem; text-transform: uppercase; }
+        .btn-whatsapp:hover {
+            background-color: #075E54;
+        }
+
+        footer {
+            text-align: center;
+            padding: 2rem;
+            font-size: 0.85rem;
+            color: #555;
+            border-top: 1px solid #333;
+            margin-top: 3rem;
+            text-transform: uppercase;
+        }
     </style>
 </head>
 <body>
 
     <header>
         <h1>NOR STY</h1>
-        <p>Alternative Clothing & Accessories</p>
+        <p>Alternative Clothing, Accessories & Makeup</p>
     </header>
 
     <div class="container">
-        
-        <h2 class="section-title">Colección Oscura</h2>
-        <div class="grid">
-            
-            <!-- Producto 1: Ropa -->
-            <div class="card">
-                <img src="ropa1.jpg" alt="Corset Nocturno" onerror="this.src='https://via.placeholder.com/300x400/1e1e1e/ffffff?text=NOR+STY'">
-                <div class="card-content">
-                    <h3>Corset Nocturno</h3>
-                    <p class="price">S/ 65.00</p>
-                    <p>Diseño ajustable con broches metálicos y encaje fino.</p>
-                </div>
-            </div>
-
-            <!-- Producto 2: Accesorio -->
-            <div class="card">
-                <img src="accesorio1.jpg" alt="Choker Clásico" onerror="this.src='https://via.placeholder.com/300x400/1e1e1e/ffffff?text=NOR+STY'">
-                <div class="card-content">
-                    <h3>Choker de Púas Clásico</h3>
-                    <p class="price">S/ 25.00</p>
-                    <p>Cuero sintético con herrajes de acero inoxidable.</p>
-                </div>
-            </div>
-
-            <!-- Producto 3: Maquillaje -->
-            <div class="card">
-                <img src="maquillaje1.jpg" alt="Labial" onerror="this.src='https://via.placeholder.com/300x400/1e1e1e/ffffff?text=NOR+STY'">
-                <div class="card-content">
-                    <h3>Labial 'Sangre Fría'</h3>
-                    <p class="price">S/ 35.00</p>
-                    <p>Tono rojo borgoña profundo, acabado mate intransferible.</p>
-                </div>
-            </div>
-
+        <!-- Botones de Filtro -->
+        <div class="filters">
+            <button class="filter-btn active" onclick="filtrar('Todos', this)">Todos</button>
+            <button class="filter-btn" onclick="filtrar('Ropa', this)">Ropa</button>
+            <button class="filter-btn" onclick="filtrar('Accesorios', this)">Accesorios</button>
+            <button class="filter-btn" onclick="filtrar('Maquillaje', this)">Maquillaje</button>
         </div>
 
-        <!-- Sección de Pago y Contacto -->
-        <div class="payment-section">
-            <h2>Asegura tu pedido</h2>
-            <p>Escanea el código QR de Yape para pagar. <br>Luego envíanos la captura para coordinar tu envío.</p>
-            
-            <div class="qr-container">
-                <img src="qr-yape.jpg" alt="QR Yape" style="width: 100%; height: 100%; object-fit: contain;" onerror="this.src='https://via.placeholder.com/250x250/ffffff/8a0303?text=QR+AQUI'">
+        <!-- Contenedor dinámico de productos -->
+        <div class="grid" id="productos-contenedor"></div>
+    </div>
+
+    <!-- Botón Flotante del Carrito -->
+    <button class="carrito-btn" onclick="abrirCarrito()">
+        🛒 Carrito (<span id="contador">0</span>) - S/ <span id="boton-total">0.00</span>
+    </button>
+
+    <!-- Modal del Carrito + Pago con Yape -->
+    <div class="modal-overlay" id="overlayCarrito">
+        <div id="modalCarrito">
+            <div class="modal-header">
+                <h2>TU PEDIDO</h2>
+                <span class="cerrar" onclick="cerrarCarrito()">✕</span>
             </div>
 
-            <!-- Recuerda cambiar 51TUNUMERO por tu número real -->
-            <a href="https://wa.me/51TUNUMERO?text=Hola%20Nor%20Sty,%20ya%20escaneé%20el%20QR%20de%20Yape.%20Te%20paso%20la%20captura%20para%20coordinar%20mi%20entrega%20en%20Huancayo." target="_blank" class="btn-whatsapp">
-                Confirmar por WhatsApp
-            </a>
-        </div>
+            <div id="lista-carrito"></div>
 
+            <div class="total-box">
+                Total a Pagar: S/ <span id="total-precio">0.00</span>
+            </div>
+
+            <!-- Bloque de Yape integrado -->
+            <div class="yape-box">
+                <p style="font-size: 0.85rem;"><strong>PASO 1:</strong> Escanea el QR o copia el número para Yapear el monto total.</p>
+                <img src="qr-yape.jpg" alt="QR Yape Nor Sty" class="qr-img" onerror="this.src='https://via.placeholder.com/180x180/ffffff/8a0303?text=QR+YAPE'">
+                <!-- Cambia este número por tu número de Yape real -->
+                <button class="btn-copy" onclick="copiarYape('999888777')">📋 Copiar número Yape: 999 888 777</button>
+            </div>
+
+            <!-- Datos de envío -->
+            <p style="font-size: 0.85rem; margin-bottom: 8px;"><strong>PASO 2:</strong> Completa tus datos y envía tu captura por WhatsApp.</p>
+            <input type="text" id="nombreCliente" class="form-input" placeholder="Tu Nombre Completo">
+            <select id="tipoEntrega" class="form-input">
+                <option value="Entrega coordinada en Huancayo">📍 Entrega en Huancayo</option>
+                <option value="Envío Nacional (Shalom / Olva)">📦 Envío a otra ciudad (Shalom / Olva)</option>
+            </select>
+
+            <button class="btn-whatsapp" onclick="enviarPedidoWhatsApp()">
+                📲 Enviar Pedido y Captura por WhatsApp
+            </button>
+        </div>
     </div>
 
     <footer>
         <p>&copy; 2026 Nor Sty. Todos los derechos reservados.</p>
     </footer>
 
+    <script>
+        // CONFIGURACIÓN: Pon aquí tu número de WhatsApp con el código 51 adelante
+        const TELEFONO_WHATSAPP = "51999888777";
+
+        // CATÁLOGO DE PRODUCTOS: Aquí puedes agregar todos los productos que quieras
+        const productos = [
+            {
+                id: 1,
+                nombre: "Corset Nocturno",
+                categoria: "Ropa",
+                precio: 65.00,
+                imagen: "ropa1.jpg",
+                descripcion: "Diseño ajustable con broches metálicos y encaje fino.",
+                variantes: ["Talla S", "Talla M", "Talla L"]
+            },
+            {
+                id: 2,
+                nombre: "Choker de Púas Clásico",
+                categoria: "Accesorios",
+                precio: 25.00,
+                imagen: "accesorio1.jpg",
+                descripcion: "Cuero sintético con herrajes de acero inoxidable.",
+                variantes: ["Único"]
+            },
+            {
+                id: 3,
+                nombre: "Labial 'Sangre Fría'",
+                categoria: "Maquillaje",
+                precio: 35.00,
+                imagen: "maquillaje1.jpg",
+                descripcion: "Tono rojo borgoña profundo, acabado mate intransferible.",
+                variantes: ["Tono Borgoña", "Tono Negro Mate"]
+            }
+        ];
+
+        // Cargar carrito guardado en el navegador
+        let carrito = JSON.parse(localStorage.getItem('carritoNorSty')) || [];
+
+        function renderizarProductos(filtro = 'Todos') {
+            const contenedor = document.getElementById('productos-contenedor');
+            contenedor.innerHTML = '';
+
+            const filtrados = filtro === 'Todos' 
+                ? productos 
+                : productos.filter(p => p.categoria === filtro);
+
+            filtrados.forEach(p => {
+                const opciones = p.variantes.map(v => `<option value="${v}">${v}</option>`).join('');
+                const card = document.createElement('div');
+                card.className = 'card';
+                card.innerHTML = `
+                    <img src="${p.imagen}" alt="${p.nombre}" onerror="this.src='https://via.placeholder.com/300x300/1e1e1e/ffffff?text=NOR+STY'">
+                    <div class="card-body">
+                        <span class="category-tag">${p.categoria}</span>
+                        <h3>${p.nombre}</h3>
+                        <p class="desc">${p.descripcion}</p>
+                        <p class="price">S/ ${p.precio.toFixed(2)}</p>
+                        <select id="var-${p.id}" class="variant-select">${opciones}</select>
+                        <button class="btn-add" onclick="agregarAlCarrito(${p.id})">+ Agregar al Carrito</button>
+                    </div>
+                `;
+                contenedor.appendChild(card);
+            });
+        }
+
+        function filtrar(categoria, btn) {
+            document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+            btn.classList.add('active');
+            renderizarProductos(categoria);
+        }
+
+        function agregarAlCarrito(id) {
+            const prod = productos.find(p => p.id === id);
+            const variante = document.getElementById(`var-${id}`).value;
+            const itemKey = `${prod.id}-${variante}`;
+
+            const existente = carrito.find(item => item.key === itemKey);
+            if (existente) {
+                existente.cantidad += 1;
+            } else {
+                carrito.push({
+                    key: itemKey,
+                    nombre: prod.nombre,
+                    variante: variante,
+                    precio: prod.precio,
+                    cantidad: 1
+                });
+            }
+            guardarYActualizar();
+        }
+
+        function cambiarCantidad(index, delta) {
+            carrito[index].cantidad += delta;
+            if (carrito[index].cantidad <= 0) {
+                carrito.splice(index, 1);
+            }
+            guardarYActualizar();
+        }
+
+        function guardarYActualizar() {
+            localStorage.setItem('carritoNorSty', JSON.stringify(carrito));
+            
+            const lista = document.getElementById('lista-carrito');
+            lista.innerHTML = '';
+            let total = 0;
+            let totalItems = 0;
+
+            if (carrito.length === 0) {
+                lista.innerHTML = '<p style="text-align:center; color:#888; padding: 15px 0;">Tu carrito está vacío.</p>';
+            }
+
+            carrito.forEach((item, index) => {
+                const subtotal = item.precio * item.cantidad;
+                total += subtotal;
+                totalItems += item.cantidad;
+
+                lista.innerHTML += `
+                    <div class="carrito-item">
+                        <div>
+                            <strong>${item.nombre}</strong> <small>(${item.variante})</small><br>
+                            <span style="color:#aaa;">S/ ${item.precio.toFixed(2)} c/u</span>
+                        </div>
+                        <div class="qty-controls">
+                            <button onclick="cambiarCantidad(${index}, -1)">-</button>
+                            <span style="margin: 0 6px;">${item.cantidad}</span>
+                            <button onclick="cambiarCantidad(${index}, 1)">+</button>
+                            <strong style="margin-left: 8px;">S/ ${subtotal.toFixed(2)}</strong>
+                        </div>
+                    </div>
+                `;
+            });
+
+            document.getElementById('contador').innerText = totalItems;
+            document.getElementById('boton-total').innerText = total.toFixed(2);
+            document.getElementById('total-precio').innerText = total.toFixed(2);
+        }
+
+        function abrirCarrito() {
+            document.getElementById('overlayCarrito').style.display = 'flex';
+        }
+
+        function cerrarCarrito() {
+            document.getElementById('overlayCarrito').style.display = 'none';
+        }
+
+        function copiarYape(numero) {
+            navigator.clipboard.writeText(numero);
+            alert("Número de Yape copiado: " + numero);
+        }
+
+        function enviarPedidoWhatsApp() {
+            if (carrito.length === 0) {
+                alert("Agrega al menos un producto al carrito primero.");
+                return;
+            }
+
+            const nombre = document.getElementById('nombreCliente').value.trim();
+            const entrega = document.getElementById('tipoEntrega').value;
+
+            if (!nombre) {
+                alert("Por favor escribe tu nombre para registrar tu pedido.");
+                return;
+            }
+
+            let total = 0;
+            let resumenProductos = carrito.map(item => {
+                const sub = item.precio * item.cantidad;
+                total += sub;
+                return `- ${item.cantidad}x ${item.nombre} (${item.variante}): S/ ${sub.toFixed(2)}`;
+            }).join('%0A');
+
+            const mensaje = `Hola *NOR STY* 🖤, soy *${nombre}*.%0A%0AQuiero confirmar mi pedido:%0A${resumenProductos}%0A%0A*TOTAL A YAPEAR: S/ ${total.toFixed(2)}*%0A*Modalidad:* ${entrega}%0A%0AAdjunto la captura de mi Yape para coordinar la entrega.`;
+
+            const url = `https://wa.me/${TELEFONO_WHATSAPP}?text=${mensaje}`;
+            window.open(url, '_blank');
+        }
+
+        // Inicializar tienda al abrir la página
+        renderizarProductos();
+        guardarYActualizar();
+    </script>
 </body>
 </html>
