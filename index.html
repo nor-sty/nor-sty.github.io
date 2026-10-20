@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>NOR STY | Alternative Clothing, Accessories & Makeup</title>
+    <title>NOR STY | Alternative Clothing & Accessories</title>
     <style>
         :root {
             --bg-color: #121212;
@@ -11,7 +11,6 @@
             --accent-color: #8a0303;
             --accent-hover: #b30000;
             --text-color: #f0f0f0;
-            --muted-text: #888888;
         }
 
         * { margin: 0; padding: 0; box-sizing: border-box; }
@@ -20,37 +19,37 @@
             font-family: 'Courier New', Courier, monospace;
             background-color: var(--bg-color);
             color: var(--text-color);
-            line-height: 1.6;
-            padding-bottom: 80px;
+            line-height: 1.5;
+            padding-bottom: 90px;
         }
 
         header {
             background-color: #000;
-            padding: 2.5rem 1rem;
+            padding: 2.2rem 1rem;
             text-align: center;
             border-bottom: 2px solid var(--accent-color);
             box-shadow: 0 4px 15px rgba(138, 3, 3, 0.3);
         }
 
         header h1 {
-            font-size: 3rem;
-            letter-spacing: 6px;
+            font-size: 2.8rem;
+            letter-spacing: 5px;
             text-transform: uppercase;
         }
 
         header p {
-            font-size: 1rem;
-            color: var(--muted-text);
-            margin-top: 8px;
+            font-size: 0.95rem;
+            color: #888;
+            margin-top: 5px;
         }
 
         .container {
-            max-width: 1050px;
+            max-width: 1000px;
             margin: 0 auto;
             padding: 2rem 1rem;
         }
 
-        /* Filtros de Categoría */
+        /* Pestañas simples por categoría */
         .filters {
             display: flex;
             justify-content: center;
@@ -63,13 +62,13 @@
             background-color: var(--card-bg);
             color: var(--text-color);
             border: 1px solid #333;
-            padding: 8px 18px;
+            padding: 8px 16px;
             cursor: pointer;
             font-family: inherit;
             font-size: 0.9rem;
             text-transform: uppercase;
-            border-radius: 3px;
-            transition: all 0.2s;
+            border-radius: 4px;
+            transition: 0.2s;
         }
 
         .filter-btn.active, .filter-btn:hover {
@@ -78,10 +77,10 @@
             font-weight: bold;
         }
 
-        /* Grilla de Productos */
+        /* Catálogo de productos */
         .grid {
             display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
             gap: 20px;
         }
 
@@ -90,23 +89,52 @@
             border: 1px solid #333;
             border-radius: 5px;
             overflow: hidden;
-            transition: transform 0.3s, border-color 0.3s;
+            transition: transform 0.25s, border-color 0.25s;
             display: flex;
             flex-direction: column;
             justify-content: space-between;
         }
 
         .card:hover {
-            transform: translateY(-5px);
+            transform: translateY(-4px);
             border-color: var(--accent-color);
         }
 
-        .card img {
+        /* Encuadre completo sin recortar la foto */
+        .img-wrapper {
             width: 100%;
             height: 260px;
-            object-fit: cover;
+            background-color: #090909;
             border-bottom: 1px solid #333;
-            cursor: pointer;
+            position: relative;
+            cursor: zoom-in;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 6px;
+        }
+
+        .img-wrapper img {
+            max-width: 100%;
+            max-height: 100%;
+            object-fit: contain;
+            transition: transform 0.25s;
+        }
+
+        .img-wrapper:hover img {
+            transform: scale(1.03);
+        }
+
+        .zoom-hint {
+            position: absolute;
+            bottom: 6px;
+            right: 6px;
+            background: rgba(0, 0, 0, 0.75);
+            color: #ccc;
+            font-size: 0.7rem;
+            padding: 2px 6px;
+            border-radius: 3px;
+            pointer-events: none;
         }
 
         .card-body {
@@ -114,41 +142,23 @@
             text-align: center;
         }
 
-        .category-tag {
-            font-size: 0.75rem;
-            color: var(--muted-text);
-            text-transform: uppercase;
-            letter-spacing: 1px;
-        }
-
         .card-body h3 {
-            font-size: 1.15rem;
-            margin: 5px 0;
+            font-size: 1.1rem;
+            margin-bottom: 5px;
             text-transform: uppercase;
         }
 
         .card-body .desc {
             font-size: 0.85rem;
-            color: #aaa;
+            color: #999;
             margin-bottom: 10px;
         }
 
         .price {
-            font-size: 1.3rem;
+            font-size: 1.25rem;
             font-weight: bold;
             color: var(--accent-color);
-            margin-bottom: 10px;
-        }
-
-        .variant-select {
-            width: 100%;
-            padding: 8px;
-            margin-bottom: 10px;
-            background-color: #121212;
-            color: var(--text-color);
-            border: 1px solid #444;
-            font-family: inherit;
-            border-radius: 3px;
+            margin-bottom: 12px;
         }
 
         .btn-add {
@@ -162,12 +172,12 @@
             text-transform: uppercase;
             border-radius: 3px;
             width: 100%;
-            transition: background 0.2s;
+            transition: background 0.2s, transform 0.1s;
         }
 
-        .btn-add:hover {
-            background-color: var(--accent-hover);
-        }
+        .btn-add:hover { background-color: var(--accent-hover); }
+        .btn-add.added { background-color: #1f7a4c; }
+        .btn-add:disabled { background-color: #333; color: #777; cursor: not-allowed; }
 
         /* Botón Flotante del Carrito */
         .carrito-btn {
@@ -180,7 +190,7 @@
             padding: 14px 22px;
             border-radius: 50px;
             font-family: inherit;
-            font-size: 1rem;
+            font-size: 0.95rem;
             font-weight: bold;
             cursor: pointer;
             box-shadow: 0 4px 15px rgba(0,0,0,0.8);
@@ -188,33 +198,31 @@
             transition: transform 0.2s;
         }
 
-        .carrito-btn:hover {
-            transform: scale(1.05);
-        }
+        .carrito-btn.bump { transform: scale(1.12); }
 
-        /* Fondo Oscuro y Modal del Carrito */
+        /* Ventanas emergentes (Carrito y Zoom de imagen) */
         .modal-overlay {
             display: none;
             position: fixed;
             top: 0; left: 0;
             width: 100%; height: 100%;
-            background: rgba(0, 0, 0, 0.85);
+            background: rgba(0, 0, 0, 0.88);
             z-index: 200;
             justify-content: center;
             align-items: center;
             padding: 15px;
         }
 
-        #modalCarrito {
+        .modal-box {
             background-color: var(--card-bg);
             border: 2px solid var(--accent-color);
             padding: 20px;
             width: 100%;
-            max-width: 460px;
+            max-width: 440px;
             max-height: 90vh;
             overflow-y: auto;
             border-radius: 5px;
-            box-shadow: 0 0 25px rgba(138, 3, 3, 0.4);
+            box-shadow: 0 0 25px rgba(0, 0, 0, 0.9);
         }
 
         .modal-header {
@@ -223,7 +231,7 @@
             align-items: center;
             border-bottom: 1px solid #333;
             padding-bottom: 10px;
-            margin-bottom: 15px;
+            margin-bottom: 12px;
         }
 
         .cerrar {
@@ -233,64 +241,90 @@
             color: var(--accent-color);
         }
 
+        /* Item del carrito con foto miniatura */
         .carrito-item {
             display: flex;
-            justify-content: space-between;
             align-items: center;
+            justify-content: space-between;
+            gap: 10px;
             border-bottom: 1px solid #2a2a2a;
-            padding: 8px 0;
-            font-size: 0.9rem;
+            padding: 10px 0;
+            font-size: 0.88rem;
+        }
+
+        .item-info {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .item-thumb {
+            width: 48px;
+            height: 48px;
+            object-fit: contain;
+            background: #090909;
+            border: 1px solid #333;
+            border-radius: 3px;
+        }
+
+        .qty-controls {
+            display: flex;
+            align-items: center;
+            gap: 6px;
         }
 
         .qty-controls button {
             background: #333;
             color: #fff;
             border: none;
-            padding: 2px 8px;
+            width: 24px;
+            height: 24px;
             cursor: pointer;
             font-family: inherit;
-            border-radius: 2px;
+            font-weight: bold;
+            border-radius: 3px;
         }
 
         .total-box {
             text-align: right;
-            font-size: 1.3rem;
+            font-size: 1.25rem;
             font-weight: bold;
             margin: 15px 0;
             color: #fff;
         }
 
-        /* Sección Yape dentro del Modal */
+        /* Cuadro de Yape */
         .yape-box {
             background-color: #121212;
-            border: 1px dashed var(--accent-color);
-            padding: 15px;
+            border: 1px solid #333;
+            padding: 14px;
             text-align: center;
             border-radius: 5px;
             margin-bottom: 15px;
         }
 
         .qr-img {
-            width: 180px;
-            height: 180px;
+            width: 190px;
+            height: 190px;
             object-fit: contain;
             background: #fff;
-            padding: 8px;
+            padding: 6px;
             border-radius: 5px;
             margin: 10px auto;
             display: block;
+            cursor: zoom-in;
         }
 
         .btn-copy {
-            background-color: #333;
+            background-color: #2a2a2a;
             color: #fff;
             border: 1px solid #555;
-            padding: 6px 12px;
+            padding: 7px 12px;
             font-family: inherit;
             font-size: 0.8rem;
             cursor: pointer;
             border-radius: 3px;
-            margin-top: 5px;
+            margin-top: 4px;
         }
 
         .form-input {
@@ -305,22 +339,36 @@
         }
 
         .btn-whatsapp {
-            background-color: #128C7E;
+            background-color: var(--accent-color);
             color: white;
             border: none;
-            padding: 12px;
+            padding: 13px;
             width: 100%;
             font-family: inherit;
-            font-size: 1rem;
+            font-size: 0.95rem;
             font-weight: bold;
             text-transform: uppercase;
             cursor: pointer;
             border-radius: 3px;
-            margin-top: 5px;
         }
 
-        .btn-whatsapp:hover {
-            background-color: #075E54;
+        .btn-whatsapp:hover { background-color: var(--accent-hover); }
+
+        /* Visor Lightbox */
+        #lightboxModal { z-index: 300; flex-direction: column; }
+        #lightboxImg {
+            max-width: 92%;
+            max-height: 80vh;
+            object-fit: contain;
+            border: 2px solid var(--accent-color);
+            background-color: #000;
+            border-radius: 4px;
+        }
+        #lightboxCaption {
+            margin-top: 10px;
+            font-size: 1rem;
+            color: #fff;
+            text-transform: uppercase;
         }
 
         footer {
@@ -330,7 +378,6 @@
             color: #555;
             border-top: 1px solid #333;
             margin-top: 3rem;
-            text-transform: uppercase;
         }
     </style>
 </head>
@@ -342,68 +389,67 @@
     </header>
 
     <div class="container">
-        <!-- Botones de Filtro -->
+        <!-- Filtros simples -->
         <div class="filters">
-            <button class="filter-btn active" onclick="filtrar('Todos', this)">Todos</button>
-            <button class="filter-btn" onclick="filtrar('Ropa', this)">Ropa</button>
-            <button class="filter-btn" onclick="filtrar('Accesorios', this)">Accesorios</button>
-            <button class="filter-btn" onclick="filtrar('Maquillaje', this)">Maquillaje</button>
+            <button class="filter-btn active" onclick="cambiarCategoria('Todos', this)">Todos</button>
+            <button class="filter-btn" onclick="cambiarCategoria('Ropa', this)">Ropa</button>
+            <button class="filter-btn" onclick="cambiarCategoria('Accesorios', this)">Accesorios</button>
+            <button class="filter-btn" onclick="cambiarCategoria('Maquillaje', this)">Maquillaje</button>
         </div>
 
-        <!-- Contenedor dinámico de productos -->
+        <!-- Productos -->
         <div class="grid" id="productos-contenedor"></div>
     </div>
 
-    <!-- Botón Flotante del Carrito -->
-    <button class="carrito-btn" onclick="abrirCarrito()">
-        🛒 Carrito (<span id="contador">0</span>) - S/ <span id="boton-total">0.00</span>
+    <!-- Botón del Carrito -->
+    <button class="carrito-btn" id="btnCarritoFlotante" onclick="abrirCarrito()">
+        🛒 Ver Carrito (<span id="contador">0</span>) - S/ <span id="boton-total">0.00</span>
     </button>
 
-    <!-- Modal del Carrito + Pago con Yape -->
+    <!-- Visor de fotos en grande -->
+    <div class="modal-overlay" id="lightboxModal" onclick="cerrarLightbox()">
+        <span class="cerrar" style="position:fixed; top:20px; right:30px; font-size:2.2rem; color:#fff;">✕</span>
+        <img id="lightboxImg" src="" alt="Detalle">
+        <p id="lightboxCaption"></p>
+    </div>
+
+    <!-- Ventana del Carrito + Yape -->
     <div class="modal-overlay" id="overlayCarrito">
-        <div id="modalCarrito">
+        <div class="modal-box">
             <div class="modal-header">
-                <h2>TU PEDIDO</h2>
+                <h2>TU COMPRA</h2>
                 <span class="cerrar" onclick="cerrarCarrito()">✕</span>
             </div>
 
             <div id="lista-carrito"></div>
 
             <div class="total-box">
-                Total a Pagar: S/ <span id="total-precio">0.00</span>
+                Total: S/ <span id="total-precio">0.00</span>
             </div>
 
-            <!-- Bloque de Yape integrado -->
             <div class="yape-box">
-                <p style="font-size: 0.85rem;"><strong>PASO 1:</strong> Escanea el QR o copia el número para Yapear el monto total.</p>
-                <img src="qr-yape.jpg" alt="QR Yape Nor Sty" class="qr-img" onerror="this.src='https://via.placeholder.com/180x180/ffffff/8a0303?text=QR+YAPE'">
-                <!-- Cambia este número por tu número de Yape real -->
+                <p style="font-size: 0.82rem; color: #ccc;">Escanea el QR (tócalo para agrandar) o copia el número para Yapear:</p>
+                <img src="qr-yape.jpg" alt="QR Yape" class="qr-img" onclick="abrirLightbox(this.src, 'QR Yape - NOR STY')" onerror="this.src='https://via.placeholder.com/200x200/ffffff/8a0303?text=QR+YAPE'">
                 <button class="btn-copy" onclick="copiarYape('920572776')">📋 Copiar número Yape: 920 572 776</button>
             </div>
 
-            <!-- Datos de envío -->
-            <p style="font-size: 0.85rem; margin-bottom: 8px;"><strong>PASO 2:</strong> Completa tus datos y envía tu captura por WhatsApp.</p>
-            <input type="text" id="nombreCliente" class="form-input" placeholder="Tu Nombre Completo">
-            <select id="tipoEntrega" class="form-input">
-                <option value="Entrega coordinada en Huancayo">📍 Entrega en Huancayo</option>
-                <option value="Envío Nacional (Shalom / Olva)">📦 Envío a otra ciudad (Shalom / Olva)</option>
-            </select>
-
+            <input type="text" id="nombreCliente" class="form-input" placeholder="Tu Nombre">
+            
             <button class="btn-whatsapp" onclick="enviarPedidoWhatsApp()">
-                📲 Enviar Pedido y Captura por WhatsApp
+                Confirmar pedido por WhatsApp
             </button>
         </div>
     </div>
 
     <footer>
-        <p>&copy; 2026 Nor Sty. Todos los derechos reservados.</p>
+        <p>&copy; 2026 NOR STY</p>
     </footer>
 
     <script>
-        // CONFIGURACIÓN: Pon aquí tu número de WhatsApp con el código 51 adelante
+        // Número oficial configurado para WhatsApp
         const TELEFONO_WHATSAPP = "51920572776";
 
-        // CATÁLOGO DE PRODUCTOS: Aquí puedes agregar todos los productos que quieras
+        // LISTA DE PRODUCTOS: Para añadir más, copia y pega un bloque { ... }
         const productos = [
             {
                 id: 1,
@@ -412,7 +458,7 @@
                 precio: 65.00,
                 imagen: "ropa1.jpg",
                 descripcion: "Diseño ajustable con broches metálicos y encaje fino.",
-                variantes: ["Talla S", "Talla M", "Talla L"]
+                agotado: false
             },
             {
                 id: 2,
@@ -421,7 +467,7 @@
                 precio: 25.00,
                 imagen: "accesorio1.jpg",
                 descripcion: "Cuero sintético con herrajes de acero inoxidable.",
-                variantes: ["Único"]
+                agotado: false
             },
             {
                 id: 3,
@@ -429,65 +475,85 @@
                 categoria: "Maquillaje",
                 precio: 35.00,
                 imagen: "maquillaje1.jpg",
-                descripcion: "Tono rojo borgoña profundo, acabado mate intransferible.",
-                variantes: ["Tono Borgoña", "Tono Negro Mate"]
+                descripcion: "Tono rojo borgoña profundo, acabado mate.",
+                agotado: false
             }
         ];
 
-        // Cargar carrito guardado en el navegador
-        let carrito = JSON.parse(localStorage.getItem('carritoNorSty')) || [];
+        let categoriaActual = 'Todos';
+        let carrito = JSON.parse(localStorage.getItem('carritoNorStySimple')) || [];
 
-        function renderizarProductos(filtro = 'Todos') {
+        function mostrarProductos() {
             const contenedor = document.getElementById('productos-contenedor');
             contenedor.innerHTML = '';
 
-            const filtrados = filtro === 'Todos' 
-                ? productos 
-                : productos.filter(p => p.categoria === filtro);
+            const filtrados = categoriaActual === 'Todos'
+                ? productos
+                : productos.filter(p => p.categoria === categoriaActual);
 
             filtrados.forEach(p => {
-                const opciones = p.variantes.map(v => `<option value="${v}">${v}</option>`).join('');
+                const fallback = 'https://via.placeholder.com/300x300/1e1e1e/ffffff?text=NOR+STY';
+                const botonHTML = p.agotado
+                    ? `<button class="btn-add" disabled>Agotado</button>`
+                    : `<button class="btn-add" id="btn-${p.id}" onclick="agregarAlCarrito(${p.id})">Agregar al Carrito</button>`;
+
                 const card = document.createElement('div');
                 card.className = 'card';
                 card.innerHTML = `
-                    <img src="${p.imagen}" alt="${p.nombre}" onerror="this.src='https://via.placeholder.com/300x300/1e1e1e/ffffff?text=NOR+STY'">
+                    <div class="img-wrapper" onclick="abrirLightbox('${p.imagen}', '${p.nombre}')">
+                        <img src="${p.imagen}" alt="${p.nombre}" onerror="this.src='${fallback}'">
+                        <span class="zoom-hint">🔍 Ver foto</span>
+                    </div>
                     <div class="card-body">
-                        <span class="category-tag">${p.categoria}</span>
                         <h3>${p.nombre}</h3>
                         <p class="desc">${p.descripcion}</p>
                         <p class="price">S/ ${p.precio.toFixed(2)}</p>
-                        <select id="var-${p.id}" class="variant-select">${opciones}</select>
-                        <button class="btn-add" onclick="agregarAlCarrito(${p.id})">+ Agregar al Carrito</button>
+                        ${botonHTML}
                     </div>
                 `;
                 contenedor.appendChild(card);
             });
         }
 
-        function filtrar(categoria, btn) {
+        function cambiarCategoria(categoria, btn) {
+            categoriaActual = categoria;
             document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
             btn.classList.add('active');
-            renderizarProductos(categoria);
+            mostrarProductos();
         }
 
         function agregarAlCarrito(id) {
             const prod = productos.find(p => p.id === id);
-            const variante = document.getElementById(`var-${id}`).value;
-            const itemKey = `${prod.id}-${variante}`;
+            const existente = carrito.find(item => item.id === id);
 
-            const existente = carrito.find(item => item.key === itemKey);
             if (existente) {
                 existente.cantidad += 1;
             } else {
                 carrito.push({
-                    key: itemKey,
+                    id: prod.id,
                     nombre: prod.nombre,
-                    variante: variante,
                     precio: prod.precio,
+                    imagen: prod.imagen,
                     cantidad: 1
                 });
             }
-            guardarYActualizar();
+
+            // Efecto interactivo en el botón
+            const btn = document.getElementById(`btn-${id}`);
+            if (btn) {
+                btn.innerText = "¡Agregado! ✓";
+                btn.classList.add("added");
+                setTimeout(() => {
+                    btn.innerText = "Agregar al Carrito";
+                    btn.classList.remove("added");
+                }, 900);
+            }
+
+            const btnFlotante = document.getElementById('btnCarritoFlotante');
+            btnFlotante.classList.add('bump');
+            setTimeout(() => btnFlotante.classList.remove('bump'), 250);
+
+            actualizarCarrito();
         }
 
         function cambiarCantidad(index, delta) {
@@ -495,19 +561,19 @@
             if (carrito[index].cantidad <= 0) {
                 carrito.splice(index, 1);
             }
-            guardarYActualizar();
+            actualizarCarrito();
         }
 
-        function guardarYActualizar() {
-            localStorage.setItem('carritoNorSty', JSON.stringify(carrito));
-            
+        function actualizarCarrito() {
+            localStorage.setItem('carritoNorStySimple', JSON.stringify(carrito));
             const lista = document.getElementById('lista-carrito');
             lista.innerHTML = '';
+
             let total = 0;
             let totalItems = 0;
 
             if (carrito.length === 0) {
-                lista.innerHTML = '<p style="text-align:center; color:#888; padding: 15px 0;">Tu carrito está vacío.</p>';
+                lista.innerHTML = '<p style="text-align:center; color:#888; padding: 15px 0;">Aún no has agregado productos.</p>';
             }
 
             carrito.forEach((item, index) => {
@@ -517,15 +583,17 @@
 
                 lista.innerHTML += `
                     <div class="carrito-item">
-                        <div>
-                            <strong>${item.nombre}</strong> <small>(${item.variante})</small><br>
-                            <span style="color:#aaa;">S/ ${item.precio.toFixed(2)} c/u</span>
+                        <div class="item-info">
+                            <img src="${item.imagen}" class="item-thumb" onerror="this.src='https://via.placeholder.com/50x50/1e1e1e/fff?text=NOR'">
+                            <div>
+                                <strong>${item.nombre}</strong><br>
+                                <span style="color:#aaa;">S/ ${ subtotal.toFixed(2) }</span>
+                            </div>
                         </div>
                         <div class="qty-controls">
                             <button onclick="cambiarCantidad(${index}, -1)">-</button>
-                            <span style="margin: 0 6px;">${item.cantidad}</span>
+                            <span>${item.cantidad}</span>
                             <button onclick="cambiarCantidad(${index}, 1)">+</button>
-                            <strong style="margin-left: 8px;">S/ ${subtotal.toFixed(2)}</strong>
                         </div>
                     </div>
                 `;
@@ -534,6 +602,20 @@
             document.getElementById('contador').innerText = totalItems;
             document.getElementById('boton-total').innerText = total.toFixed(2);
             document.getElementById('total-precio').innerText = total.toFixed(2);
+        }
+
+        function abrirLightbox(src, titulo) {
+            const img = document.getElementById('lightboxImg');
+            img.src = src;
+            img.onerror = function() {
+                this.src = 'https://via.placeholder.com/500x500/1e1e1e/ffffff?text=Foto+Pendiente';
+            };
+            document.getElementById('lightboxCaption').innerText = titulo;
+            document.getElementById('lightboxModal').style.display = 'flex';
+        }
+
+        function cerrarLightbox() {
+            document.getElementById('lightboxModal').style.display = 'none';
         }
 
         function abrirCarrito() {
@@ -551,34 +633,30 @@
 
         function enviarPedidoWhatsApp() {
             if (carrito.length === 0) {
-                alert("Agrega al menos un producto al carrito primero.");
+                alert("Tu carrito está vacío.");
                 return;
             }
 
             const nombre = document.getElementById('nombreCliente').value.trim();
-            const entrega = document.getElementById('tipoEntrega').value;
-
             if (!nombre) {
-                alert("Por favor escribe tu nombre para registrar tu pedido.");
+                alert("Por favor ingresa tu nombre.");
                 return;
             }
 
             let total = 0;
-            let resumenProductos = carrito.map(item => {
+            const detalle = carrito.map(item => {
                 const sub = item.precio * item.cantidad;
                 total += sub;
-                return `- ${item.cantidad}x ${item.nombre} (${item.variante}): S/ ${sub.toFixed(2)}`;
+                return `- ${item.cantidad}x ${item.nombre} (S/ ${sub.toFixed(2)})`;
             }).join('%0A');
 
-            const mensaje = `Hola *NOR STY* 🖤, soy *${nombre}*.%0A%0AQuiero confirmar mi pedido:%0A${resumenProductos}%0A%0A*TOTAL A YAPEAR: S/ ${total.toFixed(2)}*%0A*Modalidad:* ${entrega}%0A%0AAdjunto la captura de mi Yape para coordinar la entrega.`;
+            const mensaje = `Hola *NOR STY*, soy *${nombre}*.%0A%0AMi pedido es:%0A${detalle}%0A%0A*Total Yapeado: S/ ${total.toFixed(2)}*%0ATe envío la captura de mi pago para coordinar la entrega.`;
 
-            const url = `https://wa.me/${TELEFONO_WHATSAPP}?text=${mensaje}`;
-            window.open(url, '_blank');
+            window.open(`https://wa.me/${TELEFONO_WHATSAPP}?text=${mensaje}`, '_blank');
         }
 
-        // Inicializar tienda al abrir la página
-        renderizarProductos();
-        guardarYActualizar();
+        mostrarProductos();
+        actualizarCarrito();
     </script>
 </body>
 </html>
