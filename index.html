@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Nor Sty | Ropa, Accesorios y Maquillaje Gótico</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700&family=Lora:ital,wght@0,400;0,700;1,400&display=swap');
+        
+        :root {
+            --bg-color: #0a0a0a;
+            --text-color: #d3d3d3;
+            --accent-color: #7b001c; /* Rojo oscuro / Borgoña */
+            --card-bg: #141414;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        
+        body {
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            font-family: 'Lora', serif;
+            line-height: 1.6;
+        }
+
+        h1, h2, h3 { font-family: 'Cinzel', serif; font-weight: normal; text-align: center; }
+
+        header {
+            padding: 4rem 1rem;
+            text-align: center;
+            border-bottom: 1px solid #2a2a2a;
+            background: linear-gradient(to bottom, #000000, #0f0f0f);
+        }
+
+        header h1 { 
+            font-size: 3.5rem; 
+            letter-spacing: 5px; 
+            color: #fff; 
+            text-shadow: 0 0 15px rgba(123, 0, 28, 0.6); 
+        }
+        
+        header p { font-size: 1.2rem; font-style: italic; color: #888; margin-top: 10px; }
+
+        .container { max-width: 1000px; margin: 0 auto; padding: 2rem 1rem; }
+
+        .section-title { 
+            font-size: 2rem; 
+            margin: 3rem 0 1.5rem; 
+            border-bottom: 1px solid #2a2a2a; 
+            padding-bottom: 0.5rem; 
+            color: var(--accent-color); 
+        }
+
+        .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 2rem; }
+
+        .card {
+            background-color: var(--card-bg);
+            border: 1px solid #222;
+            border-radius: 4px;
+            overflow: hidden;
+            transition: transform 0.3s ease, border-color 0.3s ease;
+        }
+
+        .card:hover { transform: translateY(-5px); border-color: var(--accent-color); box-shadow: 0 5px 15px rgba(0,0,0,0.5); }
+
+        .card img { width: 100%; height: 280px; object-fit: cover; border-bottom: 1px solid #222; filter: grayscale(20%) contrast(110%); }
+        
+        .card-content { padding: 1.5rem; text-align: center; }
+        .card-content h3 { font-size: 1.3rem; margin-bottom: 0.5rem; color: #fff; }
+        .card-content .price { font-weight: bold; color: var(--accent-color); font-size: 1.2rem; margin-bottom: 0.5rem; }
+        .card-content p { font-size: 0.95rem; color: #aaa; }
+
+        .payment-section {
+            text-align: center;
+            margin-top: 4rem;
+            padding: 3rem 1rem;
+            background-color: var(--card-bg);
+            border: 1px solid #333;
+            border-radius: 4px;
+            box-shadow: inset 0 0 20px rgba(0,0,0,0.8);
+        }
+
+        .payment-section h2 { margin-bottom: 1rem; color: #fff; }
+
+        .qr-container { 
+            width: 250px; 
+            height: 250px; 
+            margin: 2rem auto; 
+            border: 2px solid var(--accent-color); 
+            padding: 15px; 
+            background-color: #fff; 
+            border-radius: 8px;
+        }
+
+        .btn-whatsapp {
+            display: inline-block;
+            background-color: #128C7E; 
+            color: #fff;
+            font-family: 'Cinzel', serif;
+            text-decoration: none;
+            padding: 1rem 2rem;
+            font-size: 1.1rem;
+            border-radius: 4px;
+            margin-top: 1rem;
+            transition: background 0.3s, transform 0.2s;
+            font-weight: bold;
+            letter-spacing: 1px;
+            border: 1px solid #075E54;
+        }
+        
+        .btn-whatsapp:hover { background-color: #075E54; transform: scale(1.02); }
+
+        footer { text-align: center; padding: 2rem; font-size: 0.9rem; color: #555; border-top: 1px solid #222; margin-top: 4rem; }
+    </style>
+</head>
+<body>
+
+    <header>
+        <h1>NOR STY</h1>
+        <p>Elegancia en las sombras. Ropa, Accesorios y Maquillaje.</p>
+    </header>
+
+    <div class="container">
+        
+        <h2 class="section-title">Colección Oscura</h2>
+        <div class="grid">
+            
+            <!-- Producto 1: Ropa -->
+            <div class="card">
+                <!-- Se espera que subas una imagen llamada ropa1.jpg -->
+                <img src="ropa1.jpg" alt="Vestido Gótico" onerror="this.src='https://via.placeholder.com/300x400/111/444?text=Foto+Ropa'">
+                <div class="card-content">
+                    <h3>Corset Nocturno</h3>
+                    <p class="price">S/ 65.00</p>
+                    <p>Diseño ajustable con broches metálicos y encaje fino.</p>
+                </div>
+            </div>
+
+            <!-- Producto 2: Accesorio -->
+            <div class="card">
+                <!-- Se espera que subas una imagen llamada accesorio1.jpg -->
+                <img src="accesorio1.jpg" alt="Choker" onerror="this.src='https://via.placeholder.com/300x400/111/444?text=Foto+Accesorio'">
+                <div class="card-content">
+                    <h3>Choker de Púas Clásico</h3>
+                    <p class="price">S/ 25.00</p>
+                    <p>Cuero sintético con herrajes de acero inoxidable.</p>
+                </div>
+            </div>
+
+            <!-- Producto 3: Maquillaje -->
+            <div class="card">
+                <!-- Se espera que subas una imagen llamada maquillaje1.jpg -->
+                <img src="maquillaje1.jpg" alt="Paleta de sombras" onerror="this.src='https://via.placeholder.com/300x400/111/444?text=Foto+Maquillaje'">
+                <div class="card-content">
+                    <h3>Labial 'Sangre Fría'</h3>
+                    <p class="price">S/ 35.00</p>
+                    <p>Tono rojo borgoña profundo, acabado mate intransferible.</p>
+                </div>
+            </div>
+
+        </div>
+
+        <!-- Sección de Pago y Contacto -->
+        <div class="payment-section">
+            <h2>Asegura tu pedido</h2>
+            <p>Escanea el código QR desde tu aplicación de Yape para realizar el pago al instante. <br>Una vez finalizado, envíanos la captura para gestionar tu envío.</p>
+            
+            <div class="qr-container">
+                <!-- Se espera que subas la foto de tu QR llamada qr-yape.jpg -->
+                <img src="qr-yape.jpg" alt="Código QR Yape Nor Sty" style="width: 100%; height: 100%; object-fit: contain;" onerror="this.src='https://via.placeholder.com/250x250/fff/000?text=Sube+tu+QR+Aqui'">
+            </div>
+
+            <!-- ENLACE DE WHATSAPP: Cambia 51TUNUMERO por tu número real, ejemplo: 51999888777 -->
+            <a href="https://wa.me/51TUNUMERO?text=Hola%20Nor%20Sty,%20ya%20escaneé%20el%20QR%20de%20Yape.%20Te%20paso%20la%20captura%20para%20coordinar%20mi%20entrega%20en%20Huancayo." target="_blank" class="btn-whatsapp">
+                Enviar captura por WhatsApp
+            </a>
+        </div>
+
+    </div>
+
+    <footer>
+        <p>&copy; 2026 Nor Sty. Todos los derechos reservados.</p>
+    </footer>
+
+</body>
+</html>
